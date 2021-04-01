@@ -14,7 +14,6 @@ class TimeOfDayTest {
 		assertEquals(15, theTime.getHours());
 		assertEquals(44, theTime.getMinutes());
 		assertEquals(944, theTime.getMinutesSinceMidnight());
-		assertArrayEquals(new int[] {15, 44}, theTime.getTime());
 		
 		
 	}

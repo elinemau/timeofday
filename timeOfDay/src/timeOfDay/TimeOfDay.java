@@ -17,6 +17,15 @@ import java.util.Arrays;
  */
 
 public class TimeOfDay {
+	
+	/**
+	 * @invar | 0 <= hours && hours <= 23
+	 * @invar | 0 <= minutes && minutes <= 59
+	 * 
+	 */
+	
+	private int hours;
+	private int minutes;
 
 	// getters or inspector methods
 	
@@ -24,13 +33,13 @@ public class TimeOfDay {
 	 * @basic
 	 */
 	
-	public int getHours() {throw new RuntimeException("Not yet implemented."); }
+	public int getHours() {return hours;}
 	
 	/**
 	 * @basic
 	 */
 	
-	public int getMinutes() {throw new RuntimeException("Not yet implemented."); }
+	public int getMinutes() {return minutes;}
 	
 	/**
 	 * This is a derived getter.
@@ -39,18 +48,10 @@ public class TimeOfDay {
 	 * 		| result == 60*getHours() + getMinutes()
 	 */
 	
-	public int getMinutesSinceMidnight() {throw new RuntimeException("Not yet implemented."); }
+	public int getMinutesSinceMidnight() {
+		return hours * 60 + minutes;
+	}
 	
-	/**
-	 * 
-	 * @post The result is not null.
-	 * 		| getTime() != null
-	 * @post The time is equal to the array containing the hours and minutes.
-	 * 		| Arrays.equals(getTime(), new int[] {getHours(), getMinutes()})
-	 * 
-	 */
-	
-	public int[] getTime() {throw new RuntimeException("Not yet implemented."); }
 	
 	// the constructor
 	
@@ -72,17 +73,14 @@ public class TimeOfDay {
 	
 	
 	public TimeOfDay(int hours, int minutes) {
-		if(hours < 0) {
-			throw new RuntimeException("The amount of hours is negative.");
+		if(hours < 0 || 23 < hours) {
+			throw new IllegalArgumentException("`hours`is invalid");
 		}
-		if(23 < hours) {
-			throw new RuntimeException("The amount of hours is more than 23.");
+		if(minutes < 0 || 59 < minutes) {
+			throw new IllegalArgumentException("`minutes` is invalid");
 		}
-		if(minutes < 0) {
-			throw new RuntimeException("The amount of minutes is negative.");
-		}
-		if(59 < minutes) {
-			throw new RuntimeException("The amount of minutes is more than 59.");
-		}
+		
+		this.hours = hours;
+		this.minutes = minutes;
 	}
 }
