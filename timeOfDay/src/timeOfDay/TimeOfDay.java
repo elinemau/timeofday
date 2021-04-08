@@ -5,7 +5,6 @@ import java.util.Arrays;
 /**
  * Each instance of this class represents a time of day with one minute granularity.
  * 
- * @immutable
  * 
  * The abstract state invariants of this class:
  * 
@@ -23,7 +22,7 @@ public class TimeOfDay {
 	 * 
 	 */
 	
-	private final int minutesSinceMidnight;
+	private int minutesSinceMidnight;
 
 	// getters or inspector methods
 	
@@ -80,4 +79,46 @@ public class TimeOfDay {
 		
 		this.minutesSinceMidnight = hours*60 + minutes;
 	}
+	
+	
+	
+	// getters
+	
+	/**
+	 * Sets this object's hours to the given hours
+	 * 
+	 * @mutates | this 
+	 * 
+	 * @throws new RuntimeException when the time of day has more than 23 or a negative amount of hours
+	 * 		| newHours < 0 || 23 < newHours 
+	 * 
+	 * @post | getHours() == newHours
+	 * @post | getMinutes() == old(getMinutes()) 
+	 * 
+	 */
+	
+	public void setHours(int newHours) {
+		minutesSinceMidnight = 60*newHours + getMinutes();
+	}
+	
+	/**
+	 * Sets this object's minutes to the given minutes
+	 * 
+	 * @mutates | this 
+	 * 
+	 * @throws new RuntimeException when the time of day has more than 23 or a negative amount of hours
+	 * 		| newMinutes < 0 || 59 < newMinutes 
+	 * 
+	 * @post | getHours() == old(getHours())
+	 * @post | getMinutes() == newMinutes 
+	 * 
+	 */
+	
+	public void setMinutes(int newMinutes) {
+		minutesSinceMidnight = 60*getHours() + newMinutes;
+	}
+	
+	
+	
+	
 }
