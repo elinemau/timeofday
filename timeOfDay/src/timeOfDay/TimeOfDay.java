@@ -19,13 +19,11 @@ import java.util.Arrays;
 public class TimeOfDay {
 	
 	/**
-	 * @invar | 0 <= hours && hours <= 23
-	 * @invar | 0 <= minutes && minutes <= 59
+	 * @invar | 0 <= minutesSinceMidnight && minutesSinceMidnight < 24*60 
 	 * 
 	 */
 	
-	private int hours;
-	private int minutes;
+	private final int minutesSinceMidnight;
 
 	// getters or inspector methods
 	
@@ -33,13 +31,13 @@ public class TimeOfDay {
 	 * @basic
 	 */
 	
-	public int getHours() {return hours;}
+	public int getHours() {return minutesSinceMidnight / 60 ;}
 	
 	/**
 	 * @basic
 	 */
 	
-	public int getMinutes() {return minutes;}
+	public int getMinutes() {return minutesSinceMidnight % 60;}
 	
 	/**
 	 * This is a derived getter.
@@ -49,7 +47,7 @@ public class TimeOfDay {
 	 */
 	
 	public int getMinutesSinceMidnight() {
-		return hours * 60 + minutes;
+		return minutesSinceMidnight;
 	}
 	
 	
@@ -80,7 +78,6 @@ public class TimeOfDay {
 			throw new IllegalArgumentException("`minutes` is invalid");
 		}
 		
-		this.hours = hours;
-		this.minutes = minutes;
+		this.minutesSinceMidnight = hours*60 + minutes;
 	}
 }
